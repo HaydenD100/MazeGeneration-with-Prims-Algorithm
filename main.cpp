@@ -3,8 +3,14 @@
 #include <cmath>
 #include <iostream>
 #include <cstdlib> 
+/*
+Author:HaydenD100
+GitHub: https://github.com/HaydenD100
 
+Random maze generation using prims algorithm, Prims algorith uses a set of rules to generate path tiles through a grid of solid tiles by connecting neighbours in a random order
+*/
 
+//Window size
 const int WIDTH = 800, HEIGHT = 600;
 
 struct GridCell {
@@ -15,14 +21,17 @@ struct GridCell {
 	int solid = 1;
 	//So you dont have to check the frontier list to see if this Cell is already in the frontierCells list
 	int frontier = 0;
-	
+	//Parent cell so the algorithm knows what cell it should connect this cell with
 	GridCell* parentCell = NULL;
 };
 
+//2D array of all the grids
 struct GridCell grid[80][60];
+//this is a vector that holds all the caculated neighbours of a cells.
 std::vector<GridCell*> frontierCells;
 
 
+//Draws the grid and the diffrent colour for each tile depending on if it a solid tile (Black) or a path (White) red tiles are frontier tiles
 void Draw(SDL_Renderer* renderer) {
 	//sets the background colour and then clears the window 
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
@@ -52,7 +61,9 @@ void Draw(SDL_Renderer* renderer) {
 
 }
 
+//Calculates all the neighbouring cells of a certain cell inputed as x and y and adds them to the frontierCells vector to be randomly picked later on
 void Neighbours(int x, int y) {
+
 	if (x > 1 && grid[x - 2][y].frontier == 0 && grid[x - 2][y].solid == 1) {
 		frontierCells.push_back(&grid[x - 2][y]);
 		grid[x - 2][y].frontier = 1;
@@ -79,6 +90,7 @@ void Neighbours(int x, int y) {
 
 GridCell* NextCell(int x, int y) {
 	
+	//Checks to see if there is not more frontier cells to choce from if so the maze is complete 
 	if (frontierCells.size() <= 0)
 		return NULL;
 
@@ -92,17 +104,6 @@ GridCell* NextCell(int x, int y) {
 	frontierCells.erase(std::find(frontierCells.begin(), frontierCells.end(), nextCell));
 
 	return nextCell;
-
-
-	
-
-
-	
-		
-
-	
-
-	
 }
 
 
