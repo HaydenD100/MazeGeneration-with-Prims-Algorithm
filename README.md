@@ -8,8 +8,6 @@ You can read more on Randomized Prim's algoirthm at: https://en.wikipedia.org/wi
 # Implementation
 In my implementation the black tiles repersent walls and the white tiles are the paths. The red tiles are the frontier cells and theses are the neighbouring cells to the paths, the frontier cells are the cells that are randomly picked to become passages and are connected with their a neighbouring cell.
 
-![screenshot](/docs/assets/screenshot2.png)
-
 
 # Development
 Coded in c++ with SDL2 for rendering.
