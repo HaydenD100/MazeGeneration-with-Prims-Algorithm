@@ -3,6 +3,7 @@
 #include <cmath>
 #include <iostream>
 #include <cstdlib> 
+#include <time.h>
 /*
 Author:HaydenD100
 GitHub: https://github.com/HaydenD100
@@ -110,6 +111,8 @@ GridCell* NextCell(int x, int y) {
 int main(int argc, char* args[]) {
 
 	int solve = 1;
+	//randomzies the seed by setting it to the time
+	srand(time(NULL));
 
 	for (int y = 0; y < 60; y++) {
 		for (int x = 0; x < 80; x++) {
@@ -130,6 +133,7 @@ int main(int argc, char* args[]) {
 
 	int currentX = 20;
 	int currentY = 20;
+
 	GridCell* currentCell = &grid[currentX][currentY];
 	currentCell->solid = 0;
 	Neighbours(currentCell->x, currentCell->y);
